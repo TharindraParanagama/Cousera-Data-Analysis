@@ -44,7 +44,7 @@ Updated the joined data table with the necessary columns by dropping activity_la
 ================================================
 Extracted the column names from the updated dataset and stored in **column_names**.obtained the subset of columns for which are numeric and for which the mean should be computed.stored the subset columns in **subset_col_names**.
 
-Used the chain of commands associated with the pipe characted to first the group the data in updated _dataset by subject_number and activity_name fields.Then the obtained results were summarized by computing the mean on the variables specified in the vars function as an argument(i.e.passed the subset_col_names).The final summarized mean on the grouping was stored in **summarized_result** variable.
+Used the chain of commands associated with the pipe characted to first the group the data in updated _dataset by subject_number and activity_name fields.Then the obtained results were summarized by computing the mean on the variables specified in the vars function as an argument(i.e.passed the subset_col_names).The final summarized mean on the grouping was stored in **summarized_dataset** variable.
 
 ------------------------------------------------------------------------------------------------------
 
@@ -56,7 +56,7 @@ Information on the datasets created in analysis the process.
 
 3. **updated_dataset**:the dataset that was obtained by adding a seperate column to hold the descriptive status of the activity(i.e.activity_name field) and dropping the activity label column.
 
-4.  **summarized_result**:this contains the dataset that has been grouped by activity and subject and summarized by the mean on all variables.
+4.  **summarized_dataset**:this contains the dataset that has been grouped by activity and subject and summarized by the mean on all variables.
 
 > Dimensions of the combined_dataset:10299 observations/rows and 563 columns/variables(561 original features+activity_label+subject_number)_
 
