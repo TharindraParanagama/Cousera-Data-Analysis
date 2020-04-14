@@ -39,11 +39,11 @@ header<-c(as.character(feature_names$V2),"activity_label","subject_number")
 colnames(final_dataset)<-header
 
 #extracting mean & standard deviation measures from the dataset
-x<-grep(c("*mean*"),header)
-y<-grep(c("*std*"),header)
+mean_measures<-grep(c("*mean*"),header)
+std_measures<-grep(c("*std*"),header)
 
 #creating a seubset from the final dataset that contains only mean and std measures of the dataset
-subset<-final_dataset[,c(x,y,562,563)]
+subset<-final_dataset[,c(mean_measures,std_measures,562,563)]
 
 #reading the labels
 label_map<-read.table("UCI HAR Dataset/activity_labels.txt")
@@ -67,7 +67,8 @@ column_names<-colnames(updated_dataset)
 subset_col_names<-column_names[1:79]
 
 #grouped and summarized data
-result<-updated_dataset%>%group_by(subject_number,activity_name)%>%summarise_at(vars(all_of(subset_col_names)), mean)
+summarized_result<-updated_dataset%>%group_by(subject_number,activity_name)%>%summarise_at(vars(all_of(subset_col_names)), mean)
 
+#write final result to a file
 
-
+write.table(result,"summarized_dataset.txt",row.names=F)
