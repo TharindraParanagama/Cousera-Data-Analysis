@@ -27,7 +27,7 @@ train_dataset<-cbind.data.frame(train_features,train_labels,subject_train)
 test_dataset<-cbind.data.frame(test_features,test_labels,subject_test)
 
 #Combining the train and test sets to create a single dataset
-final_dataset<-rbind.data.frame(train_dataset,test_dataset)
+combined_dataset<-rbind.data.frame(train_dataset,test_dataset)
 
 #reading feature.txt
 feature_names<-read.table("UCI HAR Dataset/features.txt")
@@ -36,14 +36,14 @@ feature_names<-read.table("UCI HAR Dataset/features.txt")
 header<-c(as.character(feature_names$V2),"activity_label","subject_number")
 
 #applying the created header
-colnames(final_dataset)<-header
+colnames(combined_dataset)<-header
 
 #extracting mean & standard deviation measures from the dataset
 mean_measures<-grep(c("*mean*"),header)
 std_measures<-grep(c("*std*"),header)
 
 #creating a seubset from the final dataset that contains only mean and std measures of the dataset
-subset<-final_dataset[,c(mean_measures,std_measures,562,563)]
+subset_combined_dataset<-combined_dataset[,c(mean_measures,std_measures,562,563)]
 
 #reading the labels
 label_map<-read.table("UCI HAR Dataset/activity_labels.txt")
@@ -52,7 +52,7 @@ label_map<-read.table("UCI HAR Dataset/activity_labels.txt")
 colnames(label_map)<-c("activity_label","activity_name")
 
 #performing inner_join to add the activity names to the dataset
-joined_data<-inner_join(subset,label_map,by="activity_label")
+joined_data<-inner_join(subset_combined_dataset,label_map,by="activity_label")
 
 #dropping activity label since we now have the activity name
 updated_dataset<-select(joined_data,-activity_label)
@@ -67,4 +67,4 @@ subset_col_names<-column_names[1:79]
 summarized_result<-updated_dataset%>%group_by(subject_number,activity_name)%>%summarise_at(vars(all_of(subset_col_names)), mean)
 
 #write final result to a file
-write.table(result,"summarized_dataset.txt",row.names=F)
+write.table(summarized_result,"summarized_dataset.txt",row.names=F)
