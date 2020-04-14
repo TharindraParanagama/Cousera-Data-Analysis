@@ -1,4 +1,4 @@
-#import the necesaary libraries for data reading
+#import the necesaary libraries
 library(readtext)
 library(dplyr)
 
@@ -20,35 +20,35 @@ subject_train<-read.table("UCI HAR Dataset/train/subject_train.txt")
 #reading subject data in test set
 subject_test<-read.table("UCI HAR Dataset/test/subject_test.txt")
 
-#creating a single train dataset by combining train features & labels
+#creating a single train dataset by combining train features, labels and subject data
 train_dataset<-cbind.data.frame(train_features,train_labels,subject_train)
 
-#creating a single train dataset by combining test features & labels
+#creating a single train dataset by combining test features, labels ans subject data
 test_dataset<-cbind.data.frame(test_features,test_labels,subject_test)
 
 #Combining the train and test sets to create a single dataset
 combined_dataset<-rbind.data.frame(train_dataset,test_dataset)
 
-#reading feature.txt
+#reading features
 feature_names<-read.table("UCI HAR Dataset/features.txt")
 
-#creating a header for the final dataset
+#creating a header for the combined dataset
 header<-c(as.character(feature_names$V2),"activity_label","subject_number")
 
-#applying the created header
+#applying the created header to the combined dataset
 colnames(combined_dataset)<-header
 
-#extracting mean & standard deviation measures from the dataset
+#extracting the indices of mean & standard deviation measures from the header
 mean_measures<-grep(c("*mean*"),header)
 std_measures<-grep(c("*std*"),header)
 
-#creating a seubset from the final dataset that contains only mean and std measures of the dataset
+#creating a subset from the combined dataset that contains only mean,std measures of the dataset,activity_label and subject_number
 subset_combined_dataset<-combined_dataset[,c(mean_measures,std_measures,562,563)]
 
-#reading the labels
+#reading the levels data of labels
 label_map<-read.table("UCI HAR Dataset/activity_labels.txt")
 
-#renaming column names for ease of joining and increase readability
+#renaming column names for ease of joining and increased readability
 colnames(label_map)<-c("activity_label","activity_name")
 
 #performing inner_join to add the activity names to the dataset
