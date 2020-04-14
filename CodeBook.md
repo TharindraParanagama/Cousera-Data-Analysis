@@ -58,13 +58,13 @@ Information on the datasets created in analysis the process.
 
 4.  **summarized_result**:this contains the dataset that has been grouped by activity and subject and summarized by the mean on all variables.
 
-Dimensions of the combined_dataset:10299 observations/rows and 563 columns/variables(561 original features+activity_label+subject_number)_
+> Dimensions of the combined_dataset:10299 observations/rows and 563 columns/variables(561 original features+activity_label+subject_number)_
 
-Dimensions of the subset_combined_dataset:10299 observations/rows and 81 columns/variables(79 original feature measures mean/std+activity_label+subject_number)
+> Dimensions of the subset_combined_dataset:10299 observations/rows and 81 columns/variables(79 original feature measures mean/std+activity_label+subject_number)
 
-Dimensions of the updated_dataset:10299 observations/rows and 81 columns/variables(79 original feature measures mean/std+activity_name+subject_number)
+> Dimensions of the updated_dataset:10299 observations/rows and 81 columns/variables(79 original feature measures mean/std+activity_name+subject_number)
 
-Dimensions of the summarized_result:180 observations/rows and 81 columns/variables(79 original feature measures mean/std+activity_name+subject_number)
+> Dimensions of the summarized_result:180 observations/rows and 81 columns/variables(79 original feature measures mean/std+activity_name+subject_number)
 
 Listed below are the 79 features extracted accordingly.The below features are based on the following readings obtained for the triaxels.
 
