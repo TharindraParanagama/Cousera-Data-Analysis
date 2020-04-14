@@ -45,19 +45,29 @@ y<-grep(c("*std*"),header)
 #creating a seubset from the final dataset that contains only mean and std measures of the dataset
 subset<-final_dataset[,c(x,y,562,563)]
 
+#reading the labels
 label_map<-read.table("UCI HAR Dataset/activity_labels.txt")
+
+#renaming column names for ease of joining and increase readability
 colnames(label_map)<-c("activity_label","activity_name")
 
-t<-inner_join(subset,label_map,by="activity_label")
+#performing inner_join to add the activity names to the dataset
+joined_data<-inner_join(subset,label_map,by="activity_label")
 
-t<-select(t,-activity_label)
+#dropping activity label since we now have the activity name
+updated_dataset<-select(joined_data,-activity_label)
+
 # k<-filter(t,subject_number==1 & activity_name=="LAYING")
 # mean(k$`tBodyAcc-mean()-X`)
-r<-colnames(t)
-r<-r[1:79]
-y<-t%>%group_by(subject_number,activity_name)%>%summarise_at(vars(all_of(r)), mean)
+
+#extracting all column names
+column_names<-colnames(updated_dataset)
+
+#subsetting the column names for which the mean is average is needed
+subset_col_names<-column_names[1:79]
+
+#grouped and summarized data
+result<-updated_dataset%>%group_by(subject_number,activity_name)%>%summarise_at(vars(all_of(subset_col_names)), mean)
 
 
 
-#u<-filter(y,subject_number==1 & activity_name=="SITTING")
-#%>%summarise_at(vars(-activity_name,-subject_number),funs(mean(.,na.rm=T)))
