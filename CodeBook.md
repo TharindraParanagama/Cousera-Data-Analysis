@@ -1,23 +1,23 @@
 ----------------------------------------------------------------------------------------------------
 **Step 1:Import Libraries**
-
+================================================
 The necessary libraries were imported first _(i.e.readtext,dplyr)_
 
 1. *readtext*-used for import and handling for plain and formatted text files
 2. *dplyr*-used as a grammar of data manipulation
 
 **Step 2:Import Data** 
-
+================================================
 Imported *X_train* and *Y_train* text files via *read.table()*.These imported data were stored in **train_features** and **train_labels**, R dataframes respectively.similarly the test data in *X_test* and *Y_test*,subject data in *subject_train* and *subject_test* text files were saved to **test_features**, **test_labels**, **subject_train** and **subject_test** R dataframes respectively.
 
 **Step 3:Creating A Single Dataset For Analysis**
-
+================================================
 The training data(i.e.train_features,train_labels,subject_train) were combined together using cbind and assigned to **train_dataset**.The same process was performed on the test portion combining test data(i.e.test_features,test_labels,subject_test)  and assigning it to **test_dataset**.
 
 Finally the train_dataset and test_dataset was subject to rbind to create a single dataset stored in **combined_dataset**.
 
 **Step 4:Manipulating the final dataset**
-
+================================================
 Inorder to create a header for the final dataset.I read the feature names(i.e.stored in feature_names) listed on features.txt(i.e.provided with UCI HAR DAtaset) converted it from factor to character and added the two additional column names _"activity_label"_-the activity the subject was subject to,_"subject_number"_-the subject's subject number assigned, which were not part of the features.This result was stored in **header**.
 
 Once the header was created for _563 variables_.The column names of **combined_dataset** was updated
@@ -29,11 +29,11 @@ accordingly.
 Using the grep function I used the regular expression _*mean*,*std*_ to search for measurements associated with mean and standard deviation in the header names and return the indices of the locations these matches were found.The extracted indices for mean measurements were stored in **mean_measurement** and for standard deviation measurement in **std_measurements**.
 
 **Step 6:Creating a subset**
-
+================================================
 To create a dataset that only contains this measurements,I passed these column indices along with the column indices for _activity_label-index 562_ and _subject_number-index-563_ to the combined_dataset to subset the required columns only.This dadaset was stored in **subset_combined_dataset** variable.
 
 **Step 7:Assigning descriptive activity labels**
-
+================================================
 After reading the data from _activity_labels.txt(i.e.provided with UCI HAR DAtaset)_ and storing it in **label_map**.Afterwards updated the column names of label map to descriptive and column names(i.e.activity_label,activity_name).
 
 performed an inner_join to create a column with descriptive activity names,by joining subset dataset and label_map on the common activity_label field.saved the joined data to **joined_data**.
@@ -41,7 +41,7 @@ performed an inner_join to create a column with descriptive activity names,by jo
 Updated the joined data table with the necessary columns by dropping activity_label field which was no longer important,since the descriptive activity name was added.The remaining data were stored in **updated_dataset**.
 
 **Step 8:Computing the average of each variable for each activity and each subject**
-
+================================================
 Extracted the column names from the updated dataset and stored in **column_names**.obtained the subset of columns for which are numeric and for which the mean should be computed.stored the subset columns in **subset_col_names**.
 
 Used the chain of commands associated with the pipe characted to first the group the data in updated _dataset by subject_number and activity_name fields.Then the obtained results were summarized by computing the mean on the variables specified in the vars function as an argument(i.e.passed the subset_col_names).The final summarized mean on the grouping was stored in **summarized_result** variable.
@@ -49,7 +49,7 @@ Used the chain of commands associated with the pipe characted to first the group
 ------------------------------------------------------------------------------------------------------
 
 Information on the datasets created in analysis the process.
-
+------------------------------------------------------------
 1. **combined_dataset**:dataset with combined train(train features,train activity labels.train subject number) and test data(test features,test activity labels.test subject number) but before subsetting by the measurements of mean and std.
 
 2. **subset_combined_dataset**:the datset that was obtained after subsetting the final_dataset on mean and std measurements and preserving the activity_label and subject_number.
@@ -58,7 +58,7 @@ Information on the datasets created in analysis the process.
 
 4.  **summarized_result**:this contains the dataset that has been grouped by activity and subject and summarized by the mean on all variables.
 
-Dimensions of the combined_dataset:10299 observations/rows and 563 columns/variables(561 original features+activity_label+subject_number)
+Dimensions of the combined_dataset:10299 observations/rows and 563 columns/variables(561 original features+activity_label+subject_number)_
 
 Dimensions of the subset_combined_dataset:10299 observations/rows and 81 columns/variables(79 original feature measures mean/std+activity_label+subject_number)
 
@@ -156,5 +156,5 @@ Features
 
 _Additional two columns_
 
-activity_label-A factor that stores the corresponding level of activity from the available 6 levels.
-subject_number-The number assigned to each subject from a sample of 30 subjects.
+80. activity_label-A factor that stores the corresponding level of activity from the available 6 levels.
+81. subject_number-The number assigned to each subject from a sample of 30 subjects.
