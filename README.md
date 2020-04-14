@@ -1,7 +1,7 @@
 # Cousera-Data Analysis
 This repo provides an analysis of the Human Activity Recognition Using Smartphones Data Set and provides details on the analysis steps.
 
-The dataset was obtained from the UCI Machine Learning Repository:
+The dataset for this analysis was obtained from the UCI Machine Learning Repository:
 [Human Activity Recognition Using Smartphones Data Set](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones)
 
 Understanding the dataset:
