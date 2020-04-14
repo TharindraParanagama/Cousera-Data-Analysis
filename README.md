@@ -32,6 +32,6 @@ But to make sure the third principle is true we need to embed the activity_label
 Therefore it's important to pay attention to the dimension of the data when combining data.Therefore I first combined the training data with it's activity labels and subject data on a column wise basis.Same was done for test data also.Later I appended the test dataset to the train dataset.Now each row contains an observational unit: a subject's measures on a particular activity.
 
 
-1. **CodeBook.md**-contains the steps taken to arrive at the _summarized_result.txt_(Which holds the average of each variable for each activity and each subject.) file in **run_analysis.R** along with description on intermediate variables been created.
+1. **CodeBook.md**-contains the steps taken to arrive at the _summarized_dataset.txt_(Which holds the average of each variable for each activity and each subject.) file in **run_analysis.R** along with description on intermediate variables been created.
 
-2. **run_analysis.R**-holds the R script or implementation that was used to arrive at _summarized_result.txt_.
+2. **run_analysis.R**-holds the R script or implementation that was used to arrive at _summarized_dataset.txt_.
