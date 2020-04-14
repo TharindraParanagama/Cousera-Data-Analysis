@@ -57,9 +57,6 @@ joined_data<-inner_join(subset,label_map,by="activity_label")
 #dropping activity label since we now have the activity name
 updated_dataset<-select(joined_data,-activity_label)
 
-# k<-filter(t,subject_number==1 & activity_name=="LAYING")
-# mean(k$`tBodyAcc-mean()-X`)
-
 #extracting all column names
 column_names<-colnames(updated_dataset)
 
@@ -70,5 +67,4 @@ subset_col_names<-column_names[1:79]
 summarized_result<-updated_dataset%>%group_by(subject_number,activity_name)%>%summarise_at(vars(all_of(subset_col_names)), mean)
 
 #write final result to a file
-
 write.table(result,"summarized_dataset.txt",row.names=F)
