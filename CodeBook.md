@@ -6,7 +6,7 @@ The necessary libraries were imported first _(i.e.readtext,dplyr)_
 1. *readtext*-used for import and handling for plain and formatted text files
 2. *dplyr*-used as a grammar of data manipulation
 
-**Step 2:Import Data** 
+**Step 2:Import Data**
 ================================================
 Imported *X_train* and *Y_train* text files via *read.table()*.These imported data were stored in **train_features** and **train_labels**, R dataframes respectively.similarly the test data in *X_test* and *Y_test*,subject data in *subject_train* and *subject_test* text files were saved to **test_features**, **test_labels**, **subject_train** and **subject_test** R dataframes respectively.
 
