@@ -1,8 +1,6 @@
 #import the necesaary libraries
 library(readtext)
 library(dplyr)
-
-#reading the features from the train dataset
 train_features<-read.table("UCI HAR Dataset/train/X_train.txt")
 
 #reading the labels from the train dataset
@@ -68,3 +66,5 @@ summarized_result<-updated_dataset%>%group_by(subject_number,activity_name)%>%su
 
 #write final result to a file
 write.table(summarized_result,"summarized_dataset.txt",row.names=F)
+
+print("test me")
